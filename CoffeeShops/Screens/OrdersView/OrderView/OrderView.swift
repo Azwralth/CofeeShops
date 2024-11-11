@@ -16,7 +16,7 @@ struct OrderView: View {
             ScrollView {
                 VStack {
                     ForEach(viewModel.orders, id: \.self) { item in
-                        OrderCellView(viewModel: OrderCellViewModel(name: "Эспрессо", price: 200, count: 2))
+                        OrderCellView(viewModel: OrderCellViewModel(name: item.name, price: item.price, count: item.count))
                     }
                 }
                 .padding(.top, 15)
@@ -33,12 +33,12 @@ struct OrderView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.systemBrown)
                     }
-
                 }
             }
         }
     }
 }
+
 
 #Preview {
     OrderView(viewModel: OrderViewModel())

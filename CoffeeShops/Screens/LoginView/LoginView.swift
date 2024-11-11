@@ -23,13 +23,14 @@ struct LoginView: View {
                 CustomButton(
                     action: {
                         isPresented.toggle()
+                        viewModel.login()
                     },
                     text: "войти")
             }
             .navigationTitle("Вход")
             .navigationBarTitleDisplayMode(.inline)
             .fullScreenCover(isPresented: $isPresented) {
-                CoffeeShopsView(viewModel: CoffeeShopsViewModel(api: NetworkApi()))
+                LazyView(build: CoffeeShopsView(viewModel: CoffeeShopsViewModel(api: NetworkApi())))
             }
         }
     }

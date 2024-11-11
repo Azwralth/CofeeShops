@@ -18,13 +18,18 @@ final class CoffeeShopsViewModel: ObservableObject {
     }
     
     func fetchLocations() {
-        api.fetchData([Locations].self, from: ApiEndpoints.locations(), httpMethod: .get, token: TokenStorage.shared.getToken(for: "authToken") ?? "") { [weak self] result in
+        guard let token = TokenStorage.shared.getToken(for: "authToken"), !token.isEmpty else {
+            print("Token is missing or empty")
+            return
+        }
+        
+        api.fetchData([Locations].self, from: ApiEndpoints.locations(), httpMethod: .get, token: token) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
                     self?.locations = data
                 case .failure(let error):
-                    print(error)
+                    print("Error fetching locations: \(error)")
                 }
             }
         }

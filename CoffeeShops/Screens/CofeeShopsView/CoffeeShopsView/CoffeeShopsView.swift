@@ -38,6 +38,7 @@ struct CoffeeShopsView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
+                        TokenStorage.shared.deleteToken(for: "authToken")
                     }) {
                         Image(systemName: "chevron.backward")
                             .font(.system(size: 13))

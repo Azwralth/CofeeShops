@@ -15,11 +15,11 @@ final class TokenStorage {
     private init() {}
     
     func saveToken(_ token: String, for key: String) {
-        userDefaults.set(token, forKey: key)
+        userDefaults.setValue(token, forKey: key)
     }
     
     func getToken(for key: String) -> String? {
-        return userDefaults.string(forKey: key)
+        userDefaults.string(forKey: key)
     }
     
     func deleteToken(for key: String) {

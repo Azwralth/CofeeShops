@@ -8,11 +8,11 @@
 import Foundation
 
 protocol AuthApi {
-    func performAuthRequest<T: Codable>(_ type: T.Type, from url: String, requestBody: T, keychain: Bool, completion: @escaping (Result<T, NetworkError>) -> Void)
+    func performAuthRequest<T: Codable, U: Codable>(_ type: T.Type, from url: String, requestBody: U, completion: @escaping (Result<T, NetworkError>) -> Void)
 }
 
 final class AuthService: AuthApi {
-    func performAuthRequest<T: Codable>(_ type: T.Type, from url: String, requestBody: T, keychain: Bool, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    func performAuthRequest<T: Codable, U: Codable>(_ type: T.Type, from url: String, requestBody: U, completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard let url = URL(string: url) else {
             completion(.failure(.invalidUrl))
             return
@@ -38,10 +38,6 @@ final class AuthService: AuthApi {
             do {
                 let result = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(result))
-                
-                if keychain, let loginResponse = result as? LoginResponse {
-                    TokenStorage.shared.saveToken(loginResponse.token, for: "authToken")
-                }
                 
             } catch {
                 completion(.failure(.requestError(error)))

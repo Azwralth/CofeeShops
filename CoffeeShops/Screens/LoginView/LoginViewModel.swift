@@ -20,10 +20,10 @@ final class LoginViewModel: ObservableObject {
     
     func login() {
         let requestBody = LoginRequest(login: loginText, password: passwordText)
-        api.performAuthRequest(LoginRequest.self, from: ApiEndpoints.login(), requestBody: requestBody, keychain: true) { result in
+        api.performAuthRequest(LoginResponse.self, from: ApiEndpoints.login(), requestBody: requestBody) { result in
             switch result {
             case .success(let data):
-                print(data)
+                TokenStorage.shared.saveToken(data.token, for: "authToken")
             case .failure(let error):
                 print(error)
             }

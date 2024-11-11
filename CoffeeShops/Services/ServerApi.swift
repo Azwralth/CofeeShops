@@ -22,7 +22,7 @@ final class NetworkApi: ServerApi {
         
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod.description
-        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBdXRoZW50aWNhdGlvbiIsImlzcyI6ImNvZmZlZSBiYWNrZW5kIiwiaWQiOjE0NTcsImV4cCI6MTczMDk3MzQyMX0.GHfo1aL700Cq2mshQHaCLm0O4KTbBF0qtQ_RDv8ozK4", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error {

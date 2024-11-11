@@ -69,6 +69,8 @@ struct DetailViewCell: View {
                         
                         Button {
                             viewModel.counter += 1
+                            let item = OrderItem(name: viewModel.name, price: viewModel.price, count: viewModel.counter)
+                            viewModel.addOrder(item: item)
                         } label: {
                             Image(systemName: "plus")
                                 .foregroundStyle(.buttonText)
@@ -79,8 +81,4 @@ struct DetailViewCell: View {
                 }
             }
     }
-}
-
-#Preview {
-    DetailViewCell(viewModel: DetailCellViewModel(counter: 1, name: "Эспрессо", price: 123, width: 169, rectangleHeight: 204, imageHeight: 137, imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Espresso_and_napolitains.jpg/1200px-Espresso_and_napolitains.jpg", api: NetworkApi()))
 }

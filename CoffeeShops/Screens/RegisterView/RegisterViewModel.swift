@@ -19,7 +19,7 @@ final class RegisterViewModel: ObservableObject {
     
     func register() {
         let requestBody = LoginRequest(login: loginText, password: passwordText)
-        api.performAuthRequest(LoginRequest.self, from: ApiEndpoints.register(), requestBody: requestBody, keychain: false) { result in
+        api.performAuthRequest(LoginResponse.self, from: ApiEndpoints.register(), requestBody: requestBody) { result in
             switch result {
             case .success(let data):
                 print(data)

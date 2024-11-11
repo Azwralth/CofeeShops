@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct OrderItem: Identifiable, Hashable {
-    let id = UUID()
+struct OrderItem: Identifiable, Hashable, Codable {
+    var id = UUID()
     let name: String
     let price: Int
     var count: Int
